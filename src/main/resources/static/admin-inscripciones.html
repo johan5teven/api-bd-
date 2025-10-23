@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Inscripciones - Admin</title>
+</head>
+<body>
+    <h1>Gestión de Inscripciones</h1>
+    <div id="sessionInfo"></div>
+    <nav>
+        <a href="/dashboardAdmin.html">Inicio</a> |
+        <a href="/admin-cursos.html">Cursos</a> |
+        <a href="/admin-inscripciones.html">Inscripciones</a> |
+        <a href="/admin-pagos.html">Pagos</a> |
+        <a href="/admin-tutores.html">Tutores</a> |
+        <a href="/admin-reportes.html">Reportes</a> |
+        <a href="/admin-materiales.html">Materiales</a> |
+        <a href="/logout">Cerrar sesión</a>
+    </nav>
+
+    <section>
+        <h2>Inscribir estudiante</h2>
+        <form id="formInscribir">
+            <label>Id Estudiante: <input id="id_estudiante" type="number" required></label><br>
+            <label>Id Curso: <input id="id_curso" type="number" required></label><br>
+            <button type="submit">Inscribir</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Lista de Inscripciones</h2>
+        <table border="1" id="tablaInscripciones">
+            <thead>
+                <tr>
+                    <th>ID Inscripción</th>
+                    <th>ID Estudiante</th>
+                    <th>Nombre</th>
+                    <th>Curso</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <script src="/js/admin-inscripciones.js"></script>
+    <script src="/js/admin-session.js"></script>
+</body>
+</html>

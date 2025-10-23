@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+</head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <form id="loginForm">
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" required><br>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena" required><br>
+
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <p id="mensaje" style="color:rgb(233, 103, 103);"></p>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const correo = document.getElementById("correo").value;
+      const contrasena = document.getElementById("contrasena").value;
+
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ correo, contrasena })
+        });
+
+        if (response.ok) {
+          // backend returns JSON like { redirect: "/dashboardX.html", rol: "..." }
+          const data = await response.json();
+          if (data && data.redirect) {
+            window.location.href = data.redirect;
+          } else {
+            document.getElementById("mensaje").textContent = 'Respuesta inesperada del servidor';
+          }
+        } else {
+          const error = await response.text();
+          document.getElementById("mensaje").textContent = error;
+        }
+      } catch (err) {
+        document.getElementById("mensaje").textContent = "Error de conexión con el servidor.";
+      }
+    });
+  </script>
+</body>
+</html>

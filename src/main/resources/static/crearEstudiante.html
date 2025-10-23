@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear cuenta - Estudiante</title>
+</head>
+<body>
+
+    <h1>Registro de Estudiante</h1>
+
+    <form id="form-estudiante" action="/estudiantes" method="post">
+
+        <!-- DATOS DE USUARIO -->
+        <h2>Datos personales</h2>
+
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="apellido">Apellido:</label><br>
+        <input type="text" id="apellido" name="apellido" required><br><br>
+
+        <label for="correo">Correo electrónico:</label><br>
+        <input type="email" id="correo" name="correo" required><br><br>
+
+        <label for="contrasena">Contraseña:</label><br>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <!-- DATOS DE ESTUDIANTE -->
+        <h2>Información académica</h2>
+
+        <label for="nivel">Nivel:</label><br>
+        <input type="text" id="nivel" name="nivel" placeholder="Ejemplo: Universitario, Secundaria..." required><br><br>
+
+        <label for="intereses">Intereses:</label><br>
+        <textarea id="intereses" name="intereses" rows="4" cols="50" placeholder="Describe tus intereses o áreas de estudio..."></textarea><br><br>
+
+        <!-- FECHA DE REGISTRO -->
+        <input type="hidden" id="fecha_registro" name="fecha_registro" value="">
+
+        <!-- BOTÓN -->
+        <button type="submit">Crear cuenta</button>
+
+    </form>
+
+    <script>
+        // Asigna la fecha actual automáticamente
+        document.getElementById("fecha_registro").value = new Date().toISOString().split('T')[0];
+
+        // Envío con fetch al backend
+        const form = document.getElementById("form-estudiante");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+                // Build payload matching the backend RegistrationRequest structure
+                const payload = {
+                    usuario: {
+                        nombre: form.nombre.value,
+                        apellido: form.apellido.value,
+                        correo: form.correo.value,
+                        contrasena: form.contrasena.value,
+                        rol: 'ESTUDIANTE',
+                        fecha_registro: form.fecha_registro.value
+                    },
+                    estudiante: {
+                        nivel: form.nivel.value,
+                        intereses: form.intereses.value
+                    }
+                };
+
+            try {
+                // POST to the API endpoint the backend exposes
+                const response = await fetch("/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert("Cuenta de estudiante creada exitosamente 🎓");
+                    form.reset();
+                } else {
+                    const error = await response.json();
+                    alert("❌ Error: " + (error.message || "No se pudo crear la cuenta"));
+                }
+            } catch (err) {
+                alert("⚠️ Error de conexión con el servidor");
+                console.error(err);
+            }
+        });
+    </script>
+
+</body>
+</html>

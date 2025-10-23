@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - Pathlion</title>
+</head>
+
+<body>
+<h1>Panel de Administración</h1>
+
+
+
+<div id="sessionInfo"></div>
+
+    <nav>
+        <button id="logoutBtn">Log out</button>
+        <a href="/dashboardAdmin.html">Inicio</a> |
+        <a href="/admin-cursos.html">Cursos</a> |
+        <a href="/admin-inscripciones.html">Inscripciones</a> |
+        <a href="/admin-pagos.html">Pagos</a> |
+        <a href="/admin-tutores.html">Tutores</a> |
+        <a href="/admin-reportes.html">Reportes</a> |
+        <a href="/admin-materiales.html">Materiales</a> |
+        <a href="/logout">Cerrar sesión</a>
+    </nav>
+
+
+
+    <section id="panel">
+        <h2>Resumen General</h2>
+
+        <div id="stats">
+            <p>Total Usuarios: <span id="totalUsuarios">0</span></p>
+            <p>Estudiantes: <span id="estudiantes">0</span></p>
+            <p>Tutores: <span id="tutores">0</span></p>
+            <p>Admins: <span id="admins">0</span></p>
+            <p>Cursos Activos: <span id="cursosActivos">0</span></p>
+            <p>Cursos Inactivos: <span id="cursosInactivos">0</span></p>
+            <p>Ventas Totales: $<span id="ventasTotales">0</span></p>
+        </div>
+
+        <h3>Últimos Pagos</h3>
+        <table border="1" id="tablaPagos">
+            <thead>
+                <tr>
+                    <th>ID Pago</th>
+                    <th>Usuario</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <h3>Actividad Reciente</h3>
+        <ul id="actividadReciente"></ul>
+
+        <h3>Gráfico: Ventas Mensuales</h3>
+        <canvas id="graficoVentas" width="400" height="200"></canvas>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/admin-dashboard.js"></script>
+    <!-- Shared admin session handling: checks /api/auth/session and wires logout -->
+    <script src="/js/admin-session.js"></script>
+</script>
+</body>
+</html>
+
+

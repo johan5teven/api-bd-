@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><title>Admin - Reportes</title>
+  <script defer src="/js/admin-reportes.js"></script>
+  <style>body{font-family:Arial;padding:16px}</style>
+</head>
+<body>
+  <h1>Reportes y Analítica</h1>
+  <div id="sessionInfo"></div>
+  <nav>
+    <a href="/dashboardAdmin.html">Inicio</a> |
+    <a href="/admin-cursos.html">Cursos</a> |
+    <a href="/admin-inscripciones.html">Inscripciones</a> |
+    <a href="/admin-pagos.html">Pagos</a> |
+    <a href="/admin-tutores.html">Tutores</a> |
+    <a href="/admin-reportes.html">Reportes</a> |
+    <a href="/admin-materiales.html">Materiales</a> |
+    <a href="/logout">Cerrar sesión</a>
+  </nav>
+  <section>
+    <h2>Usuarios (serie)</h2>
+    <pre id="usuarios"></pre>
+  </section>
+  <section>
+    <h2>Ventas (serie)</h2>
+    <pre id="ventas"></pre>
+  </section>
+  <section>
+    <h2>Actividad reciente</h2>
+    <ul id="actividad"></ul>
+  </section>
+  <script src="/js/admin-session.js"></script>
+</body>
+</html>

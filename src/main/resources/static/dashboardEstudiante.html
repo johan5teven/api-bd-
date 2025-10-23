@@ -1,0 +1,37 @@
+<h1>Dashboard Estudiante</h1>
+
+<nav>
+	<button id="logoutBtn">Log out</button>
+	<div id="sessionInfo" style="display:inline-block;margin-left:12px"></div>
+	<a href="/dashboardAdmin.html">Inicio</a> |
+	<a href="/estudiante-cursos.html">Cursos</a> |
+	<a href="/estudiante-inscripciones.html">Inscripciones</a> |
+	<a href="/estudiante-pagos.html">Pagos</a> |
+	<a href="/estudiante-tutores.html">Tutores</a> |
+	<a href="/estudiante-materiales.html">Materiales</a> |
+	<a href="/logout">Cerrar sesión</a>
+</nav>
+
+<script>
+	async function checkSession() {
+		try {
+			const res = await fetch('/api/auth/session');
+			if (res.status === 200) {
+				const body = await res.json();
+				document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
+			} else {
+				// not authenticated -> redirect to login
+				window.location.href = '/login.html';
+			}
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	// estudiante-session.js will wire logout and session check
+	// keep calling checkSession for backward compatibility
+	if (typeof checkSession === 'function') checkSession();
+	</script>
+
+	<script defer src="/js/estudiante-session.js"></script>
+

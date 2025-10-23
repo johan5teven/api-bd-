@@ -1,0 +1,28 @@
+<h1>Dashboard Tutor</h1>
+
+<button id="logoutBtn">Log out</button>
+
+<div id="sessionInfo"></div>
+
+<script>
+	async function checkSession() {
+		try {
+			const res = await fetch('/api/auth/session');
+			if (res.status === 200) {
+				const body = await res.json();
+				document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
+			} else {
+				window.location.href = '/login.html';
+			}
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	document.getElementById('logoutBtn').addEventListener('click', async () => {
+		await fetch('/api/auth/logout', { method: 'POST' });
+		window.location.href = '/login.html';
+	});
+
+	checkSession();
+</script>
