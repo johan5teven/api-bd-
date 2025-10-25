@@ -1,0 +1,156 @@
+.line {
+    width: 100%;
+    background-color: #2ba690;
+    height: 2px;  
+}
+
+.container-in {
+    background-color: #01010165;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.forms {
+    background-color: #00000072;
+    box-shadow: 0 -5px 20px #ffffff, 0 5px 20px #ffffff;
+    border-radius: 10px;
+    width: 30%;
+    margin: 20px auto;
+    text-align: center;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-register h1 {
+    color: #f2f2f2; 
+    font-size: 1.3rem;
+}
+
+.login {
+    border-radius: 10px;
+    width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.header-login h1 {
+    color: #f2f2f2;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.login form {
+    margin: 0;
+}
+
+.login form label {
+    font-weight: 900;
+    margin: 10px 0;
+    display: block;
+    font-size: 1rem;
+    color: #f2f2f2;
+    text-align: left;
+    width: 100%;
+}
+
+.login form input, .login form select {
+    margin-top: 8px;
+    margin-bottom: 15px;
+    width: 90%;
+    color: #000;
+    background: #b2d1d5;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.login form select {
+    font-size: 0.9rem;
+}
+
+.login form input[type="submit"] {
+    margin-top: 20px;
+    width: 50%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #2ba690; 
+}
+
+form {
+    margin: 2px;
+}
+
+form label {
+    font-weight: 600;
+    align-items: center;
+    margin-left: 45px;
+    display: block;
+    font-size: 0.7rem; 
+    color: #f2f2f2;
+    text-align: left;
+    width: 100%;
+}
+
+form input, select {
+    box-sizing: border-box;
+    margin-top: 2px;
+    margin-bottom: 10px;
+    align-items: center;
+    width: 80%;
+    color: #000; 
+    background: #b2d1d5; 
+    border-radius: 8px;
+    border: 2px solid #b2d1d5; 
+    padding: 6px; 
+    font-size: 0.7rem; 
+    transition: border 0.3s ease, color 0.3s ease;
+}
+
+form select {
+    font-size: 0.85rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+form input[type="submit"] {
+    margin-top: 0;
+    width: 25%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.7rem; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    text-transform: uppercase;
+    background-color: #2ba690;
+    color: #ffffff;
+    border: 1px solid #2ba690; 
+}
+
+form input[type="submit"]:hover {
+    background-color: #07212e;
+    border: 1px solid #881f3c; 
+}
+
+.admin {
+    color: #881f3c;
+    font-weight: 600;
+    text-align: right;
+    text-decoration: none;
+}
+
+.admin:hover {
+    color: white;
+    font-weight: 600;
+    text-align: right;
+    text-decoration: underline;
+}

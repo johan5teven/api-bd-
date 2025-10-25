@@ -1,0 +1,273 @@
+.container-catalog {
+    background-color: #324a5e00;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.btn-icon {
+    margin-left: 20px;
+    text-align: right;
+    justify-content: right;
+    width: 30px;
+}
+.admin img {
+    height: 30px;
+}
+
+.scontainer {
+    padding: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: #324a5e00;
+    border-bottom: 1px solid #000;
+}
+
+form {
+    border: 1px solid #000;
+    border-radius: 30px;
+    display: flex;
+    gap: 20px;
+    margin: 15px auto;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0px 12px 30px rgb(0, 0, 0, 0.5);
+}
+.curseForm {
+    border-radius: unset;
+    margin: 0;
+    border: unset;
+    display: flex;
+    flex-direction: column;
+    box-shadow: unset;
+
+}
+.no-cursos-message {
+    margin-top: 50px;
+    color: #333;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.line {
+    width: .5px;
+    background-color: #000;
+    height: 35px;
+}
+
+select,
+input[type="text"], [type="date"] {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    color: #000000;
+    border-radius: 25px;
+    flex: 1;
+    width: 100%;
+    max-width: 800px;
+    background-color: #324a5e00;
+}
+
+select:focus,
+input[type="text"], [type="date"]:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+select option {
+    background-color: #324a5e;
+    color: #ffffff;
+}
+
+.btn-custom {
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background-color: #59A52C;
+    border-radius: 50%;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-custom img {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-custom:hover {
+    background-color: #324a5e;
+}
+.curses {
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 10px;
+}
+.curse {
+    text-align: center;
+    flex: 1 1 280px;
+    max-width: 275px;
+    height: auto;
+}
+.info-select{
+    text-decoration:none;
+}
+
+.card.curse-card {
+    border: 1px solid #000000;
+    background:rgb(255, 255, 255);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 12px 30px rgb(0, 0, 0);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 300px;
+
+}
+.card.curse-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 5px;
+    background-color: #ffffff;
+
+
+}
+
+
+.card-img-wrapper {
+    display: block;
+    text-align: center;
+    width:  100%;
+    height: 95px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+.card-img-top {
+    width: 100%;
+    height: 100%;
+}
+
+.cardName {
+    padding-bottom: 5px;
+    margin: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1c6f7e;
+    min-height: 65px;
+    margin-bottom: 0px;
+
+}
+
+.cardDate, .cardType, .cardModality, .cardPrice {
+    text-align: left;
+    padding-top: 0px;
+    margin: 10px auto;
+    margin-top: 0px;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    color: #000;
+}
+
+
+.btn-custom-p {
+    display: block;
+    text-align: center;
+    width: 40%;
+    margin: 5px auto;
+    margin-top: 10px;
+    padding: 10px;
+    color: #fff;
+    background-color: #881f3c;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.btn-custom-p:hover {
+    background-color: #aed5dc;
+    color: #000;
+}
+
+.btn-custom-c {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: relative;
+    left: -25px;
+}
+.pagination {
+    font-size: 0.7rem;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: -25px;
+    display: flex;
+    justify-content: center;
+
+}
+.footer p{
+    margin-left: 100px;
+}
+
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pagination li {
+    margin: 30px 5px;
+}
+
+.pagination .a {
+    text-decoration: none;
+    background-color: #2ba690;
+    border: 1px solid #2ba690;
+    font-size: xx-small;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination .a:hover  {
+    border: 1px solid #d4d4d4;
+    background-color: #d4d4d4;
+    color: #000;
+    transform: scale(1.1);
+}
+.pagination .active  {
+    border: 1px solid #d4d4d4;
+    background-color: #d4d4d4;
+    color: #000;
+
+}
+
+
+
+
+
+
+
+
+
