@@ -2,18 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Administración - Pathlion</title>
+<title>Talent Network UEB - Panel Administración</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icon.png" />
 </head>
 
 <body>
-<h1>Panel de Administración</h1>
+    <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Panel de Administración</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
 
 
 
 <div id="sessionInfo"></div>
 
-    <nav>
-        <button id="logoutBtn">Log out</button>
+    <nav id="navadmin">
         <a href="/dashboardAdmin.html">Inicio</a> |
         <a href="/admin-cursos.html">Cursos</a> |
         <a href="/admin-inscripciones.html">Inscripciones</a> |
@@ -21,14 +36,13 @@
         <a href="/admin-tutores.html">Tutores</a> |
         <a href="/admin-reportes.html">Reportes</a> |
         <a href="/admin-materiales.html">Materiales</a> |
-        <a href="/logout">Cerrar sesión</a>
     </nav>
 
 
 
     <section id="panel">
-        <h2>Resumen General</h2>
-
+        
+        <h2>Estadisticas actuales</h2>
         <div id="stats">
             <p>Total Usuarios: <span id="totalUsuarios">0</span></p>
             <p>Estudiantes: <span id="estudiantes">0</span></p>
@@ -36,7 +50,7 @@
             <p>Admins: <span id="admins">0</span></p>
             <p>Cursos Activos: <span id="cursosActivos">0</span></p>
             <p>Cursos Inactivos: <span id="cursosInactivos">0</span></p>
-            <p>Ventas Totales: $<span id="ventasTotales">0</span></p>
+            <p>Ventas Totales: $ <span id="ventasTotales">0</span></p>
         </div>
 
         <h3>Últimos Pagos</h3>
@@ -66,6 +80,11 @@
     <script src="/js/admin-session.js"></script>
 </script>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>
 
 
