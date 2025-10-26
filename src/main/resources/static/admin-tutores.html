@@ -1,31 +1,61 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8"><title>Admin - Tutores</title>
+  <meta charset="utf-8"><title>Tutores - Admin - TalentNetworkUEB </title>
   <script defer src="/js/admin-tutores.js"></script>
-  <style>body{font-family:Arial;padding:16px} table{border-collapse:collapse}td,th{border:1px solid #ddd;padding:6px}</style>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="stylesheet" href="css/catalog.css" />
+
+<link rel="icon" href="images/icono.png" />
 </head>
 <body>
-  <h1>Gestión de Tutores</h1>
+  <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Gestión de Tutores</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
   <div id="sessionInfo"></div>
-  <nav>
-    <a href="/dashboardAdmin.html">Inicio</a> |
-    <a href="/admin-cursos.html">Cursos</a> |
-    <a href="/admin-inscripciones.html">Inscripciones</a> |
-    <a href="/admin-pagos.html">Pagos</a> |
-    <a href="/admin-tutores.html">Tutores</a> |
-    <a href="/admin-reportes.html">Reportes</a> |
-    <a href="/admin-materiales.html">Materiales</a> |
-    <a href="/logout">Cerrar sesión</a>
-  </nav>
-  <section style="margin-bottom:16px">
+  <nav id="navadmin">
+        <a href="/dashboardAdmin.html">🏠 Inicio</a> |
+        <a href="/admin-cursos.html">📘 Cursos</a> |
+        <a href="/admin-inscripciones.html">📝 Inscripciones</a> |
+        <a href="/admin-pagos.html">💳 Pagos</a> |
+        <a href="/admin-tutores.html">👨‍🏫 Tutores</a> |
+        <a href="/admin-reportes.html">📊 Reportes</a> |
+        <a href="/admin-materiales.html">📚 Materiales</a> |
+    </nav>
+  <section id="listar">
+    
     <h2>Crear Tutor</h2>
-    <label>Correo: <input id="inpCorreo" type="email" placeholder="correo@ejemplo.com"></label>
-    <label>Especialidad: <input id="inpEspecialidad" type="text" placeholder="Matemáticas"></label>
-    <button id="btnCrear">Crear</button>
-  </section>
-  <button id="btnListar">Listar Tutores</button>
-  <table id="tabla"><thead><tr><th>ID</th><th>Correo</th><th>Especialidad</th><th>Activo</th></tr></thead><tbody></tbody></table>
-  <script src="/js/admin-session.js"></script>
+        <div class="scontainer">
+        <form class="filtrarform">
+          <label> <input id="inpCorreo" type="email" placeholder="email"></label>|
+          <label> <input id="inpEspecialidad" type="text" placeholder="especialidad"></label>
+          <button type="submit" class="btncreate">
+            <i class="pi pi-search"></i> 
+            <img src="images/create.png" alt="Buscar" style="width:15px; height:15px; vertical-align:middle; ">
+  
+          </button>
+        </form>
+      </div>
+        <button id="btnListar">Listar Tutores</button>
+        <table id="tabla"><thead><tr><th>ID</th><th>Correo</th><th>Especialidad</th><th>Activo</th></tr></thead><tbody></tbody></table>
+        <script src="/js/admin-session.js"></script>
+        </section>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>

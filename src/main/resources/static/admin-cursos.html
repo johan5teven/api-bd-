@@ -2,22 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Cursos - Admin</title>
+    <title>Gestión de Cursos - Admin - Talent Network UEB</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
 </head>
 <body>
-    <h1>Gestión de Cursos</h1>
+     <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Gestión de Cursos</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
     <div id="sessionInfo"></div>
 
-    <nav>
+     <nav id="navadmin">
         <a href="/dashboardAdmin.html">🏠 Inicio</a> |
         <a href="/admin-cursos.html">📘 Cursos</a> |
-        <a href="/admin-inscripciones.html">Inscripciones</a> |
-        <a href="/admin-pagos.html">Pagos</a> |
-        <a href="/admin-tutores.html">Tutores</a> |
-        <a href="/admin-reportes.html">Reportes</a> |
-        <a href="/admin-materiales.html">Materiales</a> |
-        <a href="/logout">Cerrar sesión</a>
+        <a href="/admin-inscripciones.html">📝 Inscripciones</a> |
+        <a href="/admin-pagos.html">💳 Pagos</a> |
+        <a href="/admin-tutores.html">👨‍🏫 Tutores</a> |
+        <a href="/admin-reportes.html">📊 Reportes</a> |
+        <a href="/admin-materiales.html">📚 Materiales</a> |
     </nav>
+
 
     <section id="crear">
         <h2>Agregar nuevo curso</h2>
@@ -50,8 +66,6 @@
         </form>
     </section>
 
-    <hr>
-
     <section id="listar">
         <h2>Lista de Cursos</h2>
         <table border="1" id="tablaCursos">
@@ -75,4 +89,9 @@
     <script src="/js/admin-cursos.js"></script>
     <script src="/js/admin-session.js"></script>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>

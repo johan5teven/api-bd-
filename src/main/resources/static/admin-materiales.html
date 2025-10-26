@@ -1,33 +1,56 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8"><title>Admin - Materiales</title>
+  <meta charset="utf-8">
+  <title>Materiales - Admin - TalentNetworkUEB</title>
   <script defer src="/js/admin-materiales.js"></script>
-  <style>body{font-family:Arial;padding:16px}</style>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
 </head>
 <body>
-  <h1>Gestión de Materiales</h1>
+    <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Gestión de Materiales</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+				<li>    <button id="btnListar">Listar</button>
+</li>
+			</ul>
+		</nav>
+	</header>
   <div id="sessionInfo"></div>
-  <nav>
-    <a href="/dashboardAdmin.html">Inicio</a> |
-    <a href="/admin-cursos.html">Cursos</a> |
-    <a href="/admin-inscripciones.html">Inscripciones</a> |
-    <a href="/admin-pagos.html">Pagos</a> |
-    <a href="/admin-tutores.html">Tutores</a> |
-    <a href="/admin-reportes.html">Reportes</a> |
-    <a href="/admin-materiales.html">Materiales</a> |
-    <a href="/logout">Cerrar sesión</a>
-  </nav>
-  <section>
-    <button id="btnListar">Listar</button>
-    <table id="tabla"><thead><tr><th>ID</th><th>Título</th><th>Tipo</th><th>Curso</th></tr></thead><tbody></tbody></table>
-  </section>
-  <section>
+   <nav id="navadmin">
+        <a href="/dashboardAdmin.html">🏠 Inicio</a> |
+        <a href="/admin-cursos.html">📘 Cursos</a> |
+        <a href="/admin-inscripciones.html">📝 Inscripciones</a> |
+        <a href="/admin-pagos.html">💳 Pagos</a> |
+        <a href="/admin-tutores.html">👨‍🏫 Tutores</a> |
+        <a href="/admin-reportes.html">📊 Reportes</a> |
+        <a href="/admin-materiales.html">📚 Materiales</a> |
+    </nav>
+ 
+  <section id="crear">
     <h2>Crear material</h2>
     <input id="matTitulo" placeholder="Titulo"><select id="matTipo"><option>video</option><option>pdf</option><option>recurso</option></select>
     <input id="matCurso" placeholder="curso_id" type="number">
     <button id="btnCrear">Crear</button>
   </section>
+   <section id="listar">
+    <h2>Materiales actuales</h2>
+    <table id="tabla"><thead><tr><th>ID</th><th>Título</th><th>Tipo</th><th>Curso</th></tr></thead><tbody></tbody></table>
+  </section >
   <script src="/js/admin-session.js"></script>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>

@@ -1,35 +1,55 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8"><title>Admin - Reportes</title>
+  <meta charset="utf-8"><title>Admin - Reportes - TalentNetworkUEB</title>
   <script defer src="/js/admin-reportes.js"></script>
-  <style>body{font-family:Arial;padding:16px}</style>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
 </head>
 <body>
-  <h1>Reportes y Analítica</h1>
+  <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Reportes y Analítica</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
   <div id="sessionInfo"></div>
-  <nav>
-    <a href="/dashboardAdmin.html">Inicio</a> |
-    <a href="/admin-cursos.html">Cursos</a> |
-    <a href="/admin-inscripciones.html">Inscripciones</a> |
-    <a href="/admin-pagos.html">Pagos</a> |
-    <a href="/admin-tutores.html">Tutores</a> |
-    <a href="/admin-reportes.html">Reportes</a> |
-    <a href="/admin-materiales.html">Materiales</a> |
-    <a href="/logout">Cerrar sesión</a>
-  </nav>
-  <section>
+    <nav id="navadmin">
+        <a href="/dashboardAdmin.html">🏠 Inicio</a> |
+        <a href="/admin-cursos.html">📘 Cursos</a> |
+        <a href="/admin-inscripciones.html">📝 Inscripciones</a> |
+        <a href="/admin-pagos.html">💳 Pagos</a> |
+        <a href="/admin-tutores.html">👨‍🏫 Tutores</a> |
+        <a href="/admin-reportes.html">📊 Reportes</a> |
+        <a href="/admin-materiales.html">📚 Materiales</a> |
+    </nav>
+
+  <section id="listar">
     <h2>Usuarios (serie)</h2>
     <pre id="usuarios"></pre>
-  </section>
-  <section>
+  </section id="listar">
+  <section id="listar">
     <h2>Ventas (serie)</h2>
     <pre id="ventas"></pre>
-  </section>
-  <section>
+  </section >
+  <section id="listar">
     <h2>Actividad reciente</h2>
     <ul id="actividad"></ul>
   </section>
   <script src="/js/admin-session.js"></script>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>

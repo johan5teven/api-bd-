@@ -2,23 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Inscripciones - Admin</title>
+    <title>Gestión de Inscripciones - Admin - Talent Network UEB</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
 </head>
 <body>
-    <h1>Gestión de Inscripciones</h1>
+    <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Gestión de Inscripciones</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
     <div id="sessionInfo"></div>
-    <nav>
-        <a href="/dashboardAdmin.html">Inicio</a> |
-        <a href="/admin-cursos.html">Cursos</a> |
-        <a href="/admin-inscripciones.html">Inscripciones</a> |
-        <a href="/admin-pagos.html">Pagos</a> |
-        <a href="/admin-tutores.html">Tutores</a> |
-        <a href="/admin-reportes.html">Reportes</a> |
-        <a href="/admin-materiales.html">Materiales</a> |
-        <a href="/logout">Cerrar sesión</a>
+     <nav id="navadmin">
+        <a href="/dashboardAdmin.html">🏠 Inicio</a> |
+        <a href="/admin-cursos.html">📘 Cursos</a> |
+        <a href="/admin-inscripciones.html">📝 Inscripciones</a> |
+        <a href="/admin-pagos.html">💳 Pagos</a> |
+        <a href="/admin-tutores.html">👨‍🏫 Tutores</a> |
+        <a href="/admin-reportes.html">📊 Reportes</a> |
+        <a href="/admin-materiales.html">📚 Materiales</a> |
     </nav>
 
-    <section>
+    <section id="crear">
         <h2>Inscribir estudiante</h2>
         <form id="formInscribir">
             <label>Id Estudiante: <input id="id_estudiante" type="number" required></label><br>
@@ -29,7 +44,7 @@
 
     <hr>
 
-    <section>
+    <section id="listar">
         <h2>Lista de Inscripciones</h2>
         <table border="1" id="tablaInscripciones">
             <thead>
@@ -50,4 +65,9 @@
     <script src="/js/admin-inscripciones.js"></script>
     <script src="/js/admin-session.js"></script>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>
