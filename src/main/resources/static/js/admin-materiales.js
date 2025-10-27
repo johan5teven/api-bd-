@@ -6,16 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const datos = await res.json();
     datos.forEach(m => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${m.id_material}</td><td>${m.titulo ?? ''}</td><td>${m.tipo ?? ''}</td><td>${m.curso_id ?? ''}</td>`;
+      const urlCell = m.url_archivo ? `<a href="${m.url_archivo}" target="_blank" rel="noopener">${m.url_archivo}</a>` : '';
+      tr.innerHTML = `<td>${m.id_material}</td><td>${m.titulo ?? ''}</td><td>${m.tipo ?? ''}</td><td>${m.curso_id ?? ''}</td><td>${urlCell}</td>`;
       tbody.appendChild(tr);
     });
   });
 
   document.getElementById('btnCrear').addEventListener('click', async () => {
-    const titulo = document.getElementById('matTitulo').value;
-    const tipo = document.getElementById('matTipo').value;
-    const curso_id = parseInt(document.getElementById('matCurso').value || '0');
-    const body = { titulo, tipo, curso_id: curso_id || undefined };
+  const titulo = document.getElementById('matTitulo').value;
+  const tipo = document.getElementById('matTipo').value;
+  const curso_id = parseInt(document.getElementById('matCurso').value || '0');
+  const url_archivo = document.getElementById('matUrl') ? document.getElementById('matUrl').value.trim() : '';
+  const body = { titulo, tipo, curso_id: curso_id || undefined, url_archivo: url_archivo || undefined };
     const res = await fetch('/api/admin/materiales/crear', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const data = await res.json();
     if (res.ok) alert('Creado: ' + JSON.stringify(data)); else alert('Error: ' + JSON.stringify(data));

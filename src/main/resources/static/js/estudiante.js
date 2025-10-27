@@ -55,6 +55,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     console.error('Error during load()', err);
   }
+  // load the student's own courses (calls stored procedure via backend)
+  try {
+    const sRes = await fetch('/api/auth/session');
+    if (sRes.ok) {
+      const sj = await sRes.json();
+      if (sj && sj.authenticated && sj.id) {
+        try {
+          const r = await fetch('/api/estudiante/mis-cursos?estudianteId=' + encodeURIComponent(sj.id));
+          if (r.ok) {
+            const cursos = await r.json();
+            const elAd = document.getElementById('adquiridos');
+            if (elAd) {
+              const h = document.createElement('div'); h.innerHTML = '<h3>Mis cursos</h3>'; elAd.appendChild(h);
+              if (cursos && cursos.length) {
+                cursos.forEach(c => { const d = document.createElement('div'); d.className = 'card'; d.innerHTML = `<strong>${c.titulo}</strong> &nbsp; ${c.modalidad || ''} &nbsp; (${c.estado_inscripcion || c.estado || ''})`; elAd.appendChild(d); });
+              } else {
+                const p = document.createElement('p'); p.innerText = 'No tienes cursos inscritos.'; elAd.appendChild(p);
+              }
+            }
+          }
+        } catch(e) { console.warn('Error fetching mis-cursos', e); }
+      }
+    }
+  } catch(e) { console.warn('session check failed', e); }
   // load tutors into select
   try {
     const tRes = await fetch('/api/estudiante/tutores');

@@ -43,6 +43,71 @@
     })();
   </script>
 
+  <script>
+    // Fetch session to get the estudiante id, then request pago resumen
+    (async function(){
+      try {
+        const sres = await fetch('/api/auth/session');
+        if (!sres.ok) return; // session script already redirects if needed
+        const sbody = await sres.json();
+        const usuarioId = sbody.id || sbody.usuarioId || sbody.usuario || sbody.usuario_id || sbody.usuarioId;
+        // Try several common keys – backend sets usuarioId in session
+        const id = usuarioId || sbody.correo || sbody.usuarioId || sbody.id_usuario || sbody.usuarioId;
+        // If we can't find numeric id, but there's a numeric 'usuarioId' property, use that
+        const resolvedId = sbody.usuarioId || sbody.id || sbody.usuarioId || sbody.id_usuario || sbody.usuarioId;
+        const finalId = resolvedId || id;
+        if (!finalId) return; // nothing to do
+
+        const res = await fetch('/api/pagos/resumen-usuario/' + encodeURIComponent(finalId));
+        if (!res.ok) {
+          document.getElementById('pagos').innerText = 'No se pudo obtener el resumen de pagos.';
+          return;
+        }
+        const body = await res.json();
+        const container = document.getElementById('pagos');
+        container.innerHTML = '';
+
+        // Render per-course breakdown
+        if (Array.isArray(body.por_curso) && body.por_curso.length>0) {
+          const table = document.createElement('table');
+          table.style.borderCollapse = 'collapse';
+          table.style.width = '100%';
+          const header = document.createElement('tr');
+          ['Curso','Monto pagado','Fecha inscripción'].forEach(h => {
+            const th = document.createElement('th'); th.innerText = h; th.style.border = '1px solid #ddd'; th.style.padding = '8px'; header.appendChild(th);
+          });
+          table.appendChild(header);
+          body.por_curso.forEach(c => {
+            const tr = document.createElement('tr');
+            const tdTitle = document.createElement('td'); tdTitle.innerText = c.titulo || c.nombre || c.id_curso; tdTitle.style.border='1px solid #ddd'; tdTitle.style.padding='8px';
+            const tdMonto = document.createElement('td'); tdMonto.innerText = (c.monto_pagado!=null? c.monto_pagado : c.monto) || 0; tdMonto.style.border='1px solid #ddd'; tdMonto.style.padding='8px';
+            const tdFecha = document.createElement('td'); tdFecha.innerText = c.fecha_inscripcion || c.fecha || '' ; tdFecha.style.border='1px solid #ddd'; tdFecha.style.padding='8px';
+            tr.appendChild(tdTitle); tr.appendChild(tdMonto); tr.appendChild(tdFecha);
+            table.appendChild(tr);
+          });
+          container.appendChild(table);
+        } else {
+          container.appendChild(document.createElement('div')).innerText = 'No hay cursos comprados.';
+        }
+
+        // Totals
+        const totalsDiv = document.createElement('div');
+        totalsDiv.style.marginTop = '12px';
+        const totalByCourses = document.createElement('p');
+        totalByCourses.innerText = 'Total (por cursos listados): ' + (body.total_by_courses != null ? body.total_by_courses : '0');
+        totalsDiv.appendChild(totalByCourses);
+        const totalGastado = document.createElement('p');
+        totalGastado.innerText = 'Total gastado (SP / cálculo): ' + (body.total_gastado != null ? body.total_gastado : '0');
+        totalsDiv.appendChild(totalGastado);
+        container.appendChild(totalsDiv);
+
+      } catch (e) {
+        console.error('Error cargando resumen de pagos', e);
+        document.getElementById('pagos').innerText = 'Error cargando resumen de pagos.';
+      }
+    })();
+  </script>
+
 </body>
 <footer>
 		<p>

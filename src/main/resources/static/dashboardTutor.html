@@ -1,28 +1,41 @@
-<h1>Dashboard Tutor</h1>
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dashboard Tutor</title>
+	<script defer src="/js/tutor-dashboard.js"></script>
+	<style>body{font-family:Arial;padding:16px}.card{border:1px solid #ddd;padding:8px;margin:8px;border-radius:6px}</style>
+</head>
+<body>
+	<h1>Dashboard Tutor</h1>
+	<button id="logoutBtn">Log out</button>
+	<div id="sessionInfo" style="margin:8px 0 16px 0"></div>
 
-<button id="logoutBtn">Log out</button>
+	<label>Su id de tutor (temporal): <input id="tutorId" type="number"></label>
+	<button id="btnLoad">Cargar</button>
+	<div id="cursos"></div>
 
-<div id="sessionInfo"></div>
-
-<script>
-	async function checkSession() {
-		try {
-			const res = await fetch('/api/auth/session');
-			if (res.status === 200) {
-				const body = await res.json();
-				document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
-			} else {
-				window.location.href = '/login.html';
+	<script>
+		async function checkSession() {
+			try {
+				const res = await fetch('/api/auth/session');
+				if (res.status === 200) {
+					const body = await res.json();
+					document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
+				} else {
+					window.location.href = '/login.html';
+				}
+			} catch (e) {
+				console.error(e);
 			}
-		} catch (e) {
-			console.error(e);
 		}
-	}
 
-	document.getElementById('logoutBtn').addEventListener('click', async () => {
-		await fetch('/api/auth/logout', { method: 'POST' });
-		window.location.href = '/login.html';
-	});
+		document.getElementById('logoutBtn').addEventListener('click', async () => {
+			await fetch('/api/auth/logout', { method: 'POST' });
+			window.location.href = '/login.html';
+		});
 
-	checkSession();
-</script>
+		checkSession();
+	</script>
+</body>
+</html>

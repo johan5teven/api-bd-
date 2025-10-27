@@ -31,6 +31,7 @@ public class AdminMaterialController {
             r.put("titulo", m.getTitulo());
             r.put("tipo", m.getTipo());
             r.put("curso_id", m.getCurso() != null ? m.getCurso().getId_curso() : null);
+            r.put("url_archivo", m.getUrl_archivo());
             return r;
         }).toList();
     }
@@ -50,6 +51,9 @@ public class AdminMaterialController {
             if (body.containsKey("curso_id")) {
                 Integer id = (Integer) body.get("curso_id");
                 cursoRepo.findById(id).ifPresent(c -> m.setCurso(c));
+            }
+            if (body.containsKey("url_archivo") && body.get("url_archivo") instanceof String) {
+                m.setUrl_archivo((String) body.get("url_archivo"));
             }
             materialRepo.save(m);
             return ResponseEntity.ok(Map.of("id_material", m.getId_material()));
