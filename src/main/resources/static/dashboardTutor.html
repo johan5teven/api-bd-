@@ -1,9 +1,30 @@
-<h1>Dashboard Tutor</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+<title>Talent Network UEB - Panel Estudiante</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Dashboard Tutor</h1>
 
-<button id="logoutBtn">Log out</button>
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
 
-<div id="sessionInfo"></div>
-
+<section id="panel">
+</section>
 <script>
 	async function checkSession() {
 		try {
@@ -26,3 +47,10 @@
 
 	checkSession();
 </script>
+</body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
+</html>
