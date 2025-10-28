@@ -38,13 +38,16 @@
  
   <section id="crear">
     <h2>Crear material</h2>
-    <input id="matTitulo" placeholder="Titulo"><select id="matTipo"><option>video</option><option>pdf</option><option>recurso</option></select>
+    <input id="matTitulo" placeholder="Titulo">
+    <select id="matTipo"><option>video</option><option>pdf</option><option>recurso</option></select>
     <input id="matCurso" placeholder="curso_id" type="number">
+    <!-- Nuevo campo para la URL del material -->
+    <input id="matUrl" placeholder="URL del recurso (http://...)" type="url">
     <button id="btnCrear">Crear</button>
   </section>
    <section id="listar">
     <h2>Materiales actuales</h2>
-    <table id="tabla"><thead><tr><th>ID</th><th>Título</th><th>Tipo</th><th>Curso</th></tr></thead><tbody></tbody></table>
+    <table id="tabla"><thead><tr><th>ID</th><th>Título</th><th>Tipo</th><th>Curso</th><th>URL</th></tr></thead><tbody></tbody></table>
   </section >
   <script src="/js/admin-session.js"></script>
 </body>

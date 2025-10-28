@@ -68,6 +68,16 @@
     <button id="btnRegistrar">Registrar Pago</button>
     </form>
   </section>
+  
+  <section id="crear-manual">
+    <h2>Registrar pago manual por curso</h2>
+    <div class="scontainer">
+      <label>ID Estudiante: <input id="manualEstudianteId" type="number"></label>
+      <label>ID Curso: <input id="manualCursoId" type="number"></label>
+      <label>Método: <select id="manualMetodo"><option>tarjeta</option><option>transferencia</option><option>otro</option></select></label>
+      <button type="button" id="btnCrearManualCurso">Crear orden y pago manual</button>
+    </div>
+  </section>
   <script src="/js/admin-session.js"></script>
 </body>
 <footer>

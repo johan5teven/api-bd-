@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-<title>Talent Network UEB - Panel Estudiante</title>
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="css/admin.css" />
-<link rel="icon" href="images/icono.png" />
+	<meta charset="utf-8" />
+	<title>Dashboard Tutor</title>
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/admin.css" />
+	<link rel="icon" href="images/icono.png" />
+	<script defer src="/js/tutor-dashboard.js"></script>
+	<style>/* small inline fallbacks */
+		body{font-family:Arial,Helvetica,sans-serif;padding:12px}
+		.card{border:1px solid #ddd;padding:8px;margin:8px;border-radius:6px}
+	</style>
 </head>
 <body>
 	<header>
 		<div class="logo">
-			<a href="index.html"> 
+			<a href="index.html">
 				<img src="images/imagotipo.png" alt="Talent Network UEB" />
 			</a>
 		</div>
-        <h1>Dashboard Tutor</h1>
+		<h1>Dashboard Tutor</h1>
 
 		<nav class="header-button">
 			<ul>
-				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+				<li><button id="logoutBtn">Cerrar Sesión</button></li>
 			</ul>
 		</nav>
 	</header>
 
-<section id="panel">
-</section>
-<script>
-	async function checkSession() {
-		try {
-			const res = await fetch('/api/auth/session');
-			if (res.status === 200) {
-				const body = await res.json();
-				document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
-			} else {
-				window.location.href = '/login.html';
+	<div id="main" style="max-width:1100px;margin:0 auto">
+		<div id="sessionInfo" style="margin:8px 0 16px 0"></div>
+
+		<label>Su id de tutor (temporal): <input id="tutorId" type="number"></label>
+		<button id="btnLoad">Cargar</button>
+
+		<section id="panel" style="margin-top:12px"></section>
+		<div id="cursos"></div>
+	</div>
+
+	<script>
+		async function checkSession() {
+			try {
+				const res = await fetch('/api/auth/session');
+				if (res.status === 200) {
+					const body = await res.json();
+					document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
+				} else {
+					window.location.href = '/login.html';
+				}
+			} catch (e) {
+				console.error(e);
 			}
-		} catch (e) {
-			console.error(e);
 		}
-	}
 
-	document.getElementById('logoutBtn').addEventListener('click', async () => {
-		await fetch('/api/auth/logout', { method: 'POST' });
-		window.location.href = '/login.html';
-	});
+		document.getElementById('logoutBtn').addEventListener('click', async () => {
+			await fetch('/api/auth/logout', { method: 'POST' });
+			window.location.href = '/login.html';
+		});
 
-	checkSession();
-</script>
-</body>
-<footer>
-		<p>
-			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
-		</p>
+		// initialize
+		checkSession();
+	</script>
+
+	<footer>
+		<p>&copy; 2025 Talent Network UEB &nbsp;&nbsp; Bases de datos 2 &nbsp;&nbsp; Universidad El Bosque</p>
 	</footer>
+</body>
 </html>

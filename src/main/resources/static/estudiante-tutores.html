@@ -20,6 +20,159 @@
   <h1>Tutores</h1>
   <div id="tutores"></div>
 
+  <script>
+    // Load cursos and show assigned tutor contact per curso
+    (async function(){
+      try {
+  // request the SP-backed endpoint that returns tutor per course
+  const res = await fetch('/api/estudiante/tutores-por-curso');
+        if (!res.ok) { document.getElementById('tutores').innerText = 'No se pudieron cargar los tutores.'; return; }
+        const body = await res.json();
+  const cursos = body || [];
+        const container = document.getElementById('tutores');
+        if (!cursos.length) { container.innerText = 'No hay cursos disponibles.'; return; }
+
+        cursos.forEach(c => {
+          const card = document.createElement('div');
+          card.style.border = '1px solid #ddd';
+          card.style.padding = '10px';
+          card.style.marginBottom = '8px';
+
+          const title = document.createElement('h3');
+          title.innerText = c.titulo_curso || c.titulo || ('Curso ' + (c.id || c.id_curso || ''));
+          card.appendChild(title);
+
+          // show course content/description if provided by SP
+          const desc = document.createElement('p');
+          desc.innerText = c.contenido || c.descripcion || '';
+          card.appendChild(desc);
+
+          const btn = document.createElement('button');
+          btn.innerText = 'Ver tutor asignado';
+          btn.style.marginRight = '8px';
+          card.appendChild(btn);
+
+          const tutorDiv = document.createElement('div');
+          tutorDiv.style.marginTop = '8px';
+          tutorDiv.style.display = 'none';
+          if (c.tutor) {
+            const t = c.tutor;
+            const name = document.createElement('p'); name.innerHTML = '<strong>Nombre:</strong> ' + (t.nombre || 'N/A');
+            const correo = document.createElement('p'); correo.innerHTML = '<strong>Correo:</strong> ' + (t.correo || 'N/A');
+            const esp = document.createElement('p'); esp.innerHTML = '<strong>Especialidad:</strong> ' + (t.especialidad || 'N/A');
+            tutorDiv.appendChild(name); tutorDiv.appendChild(correo); tutorDiv.appendChild(esp);
+          } else {
+            tutorDiv.appendChild(document.createElement('p')).innerText = 'No hay tutor asignado a este curso.';
+          }
+
+          btn.addEventListener('click', () => {
+            tutorDiv.style.display = tutorDiv.style.display === 'none' ? 'block' : 'none';
+            btn.innerText = tutorDiv.style.display === 'none' ? 'Ver tutor asignado' : 'Ocultar tutor';
+          });
+
+          card.appendChild(tutorDiv);
+
+          // Materials section (collapsible + refresh)
+          const matSection = document.createElement('div');
+          matSection.style.marginTop = '8px';
+          const matTitle = document.createElement('h4');
+          matTitle.innerText = 'Materiales del curso';
+          matSection.appendChild(matTitle);
+
+          // controls: toggle + refresh
+          const matControls = document.createElement('div');
+          matControls.style.marginBottom = '6px';
+          const matToggle = document.createElement('button');
+          matToggle.innerText = 'Ver materiales';
+          matToggle.style.marginRight = '8px';
+          const refreshBtn = document.createElement('button');
+          refreshBtn.innerText = 'Refrescar materiales';
+          matControls.appendChild(matToggle);
+          matControls.appendChild(refreshBtn);
+          matSection.appendChild(matControls);
+
+          const matList = document.createElement('div');
+          matList.style.paddingLeft = '8px';
+          matList.style.display = 'none';
+
+          function renderMaterialsInto(listEl, materiales) {
+            // clear
+            while (listEl.firstChild) listEl.removeChild(listEl.firstChild);
+            if (!materiales || materiales.length === 0) {
+              const p = document.createElement('p');
+              p.innerText = 'No hay materiales disponibles para este curso.';
+              listEl.appendChild(p);
+              return;
+            }
+            materiales.forEach(m => {
+              const mi = document.createElement('div');
+              mi.style.borderTop = '1px dashed #eee';
+              mi.style.padding = '6px 0';
+              const mt = document.createElement('p'); mt.innerHTML = '<strong>Título:</strong> ' + (m.titulo || m.titulo_material || 'N/A');
+              const mtipo = document.createElement('p'); mtipo.innerHTML = '<strong>Tipo:</strong> ' + (m.tipo || m.tipo_material || 'N/A');
+              const murl = document.createElement('p');
+              if (m.url_archivo) {
+                const a = document.createElement('a');
+                a.href = m.url_archivo;
+                a.innerText = m.url_archivo;
+                a.target = '_blank';
+                murl.appendChild(document.createTextNode('URL: '));
+                murl.appendChild(a);
+              } else {
+                murl.innerHTML = '<strong>URL:</strong> N/A';
+              }
+              const mf = document.createElement('p'); mf.innerHTML = '<strong>Fecha carga:</strong> ' + (m.fecha_carga || 'N/A');
+              mi.appendChild(mt); mi.appendChild(mtipo); mi.appendChild(murl); mi.appendChild(mf);
+              listEl.appendChild(mi);
+            });
+          }
+
+          // initial render (but hidden)
+          renderMaterialsInto(matList, c.materiales || []);
+
+          // toggle behavior
+          matToggle.addEventListener('click', () => {
+            const showing = matList.style.display !== 'none';
+            matList.style.display = showing ? 'none' : 'block';
+            matToggle.innerText = showing ? 'Ver materiales' : 'Ocultar materiales';
+          });
+
+          // refresh behavior: re-fetch endpoint and update this course materials
+          refreshBtn.addEventListener('click', async () => {
+            try {
+              refreshBtn.disabled = true;
+              refreshBtn.innerText = 'Refrescando...';
+              const r = await fetch('/api/estudiante/tutores-por-curso');
+              if (!r.ok) { throw new Error('no ok'); }
+              const updated = await r.json();
+              const courseId = c.id_curso || c.id || c.id;
+              const found = (updated || []).find(x => (x.id_curso || x.id) == courseId);
+              const materialsNow = (found && found.materiales) ? found.materiales : [];
+              renderMaterialsInto(matList, materialsNow);
+              // open materials so user sees the result
+              matList.style.display = 'block';
+              matToggle.innerText = 'Ocultar materiales';
+            } catch (err) {
+              console.error('Error refrescando materiales', err);
+              alert('No se pudo refrescar los materiales.');
+            } finally {
+              refreshBtn.disabled = false;
+              refreshBtn.innerText = 'Refrescar materiales';
+            }
+          });
+
+          matSection.appendChild(matList);
+          card.appendChild(matSection);
+          container.appendChild(card);
+        });
+
+      } catch (e) {
+        console.error('Error cargando tutores por curso', e);
+        document.getElementById('tutores').innerText = 'Error cargando tutores.';
+      }
+    })();
+  </script>
+
 </body>
 <footer>
 		<p>

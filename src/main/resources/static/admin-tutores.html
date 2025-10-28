@@ -41,10 +41,11 @@
         <form class="filtrarform">
           <label> <input id="inpCorreo" type="email" placeholder="email"></label>|
           <label> <input id="inpEspecialidad" type="text" placeholder="especialidad"></label>
-          <button type="submit" class="btncreate">
-            <i class="pi pi-search"></i> 
-            <img src="images/create.png" alt="Buscar" style="width:15px; height:15px; vertical-align:middle; ">
-  
+          <!-- button changed to type=button and given id btnCrear so admin-tutores.js can attach handler -->
+          <button type="button" id="btnCrear" class="btncreate">
+            <i class="pi pi-plus"></i>
+            <img src="images/create.png" alt="Crear" style="width:15px; height:15px; vertical-align:middle; margin-left:6px;">
+            Crear
           </button>
         </form>
       </div>

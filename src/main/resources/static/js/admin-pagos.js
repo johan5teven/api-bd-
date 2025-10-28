@@ -62,6 +62,24 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) { mostrarMensaje(e.message, true); }
   });
 
+  // Crear orden/pago manual por curso
+  document.getElementById('btnCrearManualCurso').addEventListener('click', async () => {
+    const idEst = parseInt(document.getElementById('manualEstudianteId').value);
+    const idCurso = parseInt(document.getElementById('manualCursoId').value);
+    const metodo = document.getElementById('manualMetodo').value;
+    if (!idEst || !idCurso) return mostrarMensaje('ID estudiante y curso son requeridos', true);
+    try {
+      const res = await fetch('/api/admin/pagos/crear-manual-curso', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_estudiante: idEst, id_curso: idCurso, metodo_pago: metodo })
+      });
+      const data = await res.json();
+      if (!res.ok) { mostrarMensaje('Error creando pago manual: ' + JSON.stringify(data), true); return; }
+      mostrarMensaje('Pago manual creado (via ' + (data.via||'unknown') + '). Orden: ' + data.id_orden + ' Pago: ' + data.id_pago);
+      listarTodos();
+    } catch (e) { mostrarMensaje(e.message, true); }
+  });
+
   // initial load
   listarTodos();
 });
