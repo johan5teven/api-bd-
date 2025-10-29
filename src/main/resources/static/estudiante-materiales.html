@@ -2,22 +2,36 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Materiales - Estudiante</title>
+  <title>Materiales - Estudiante- TalentNetworkUEB</title>
+   <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
   <script defer src="/js/estudiante-session.js"></script>
 </head>
 <body>
-  <nav>
-    <button id="logoutBtn">Cerrar sesión</button>
-    <span id="sessionInfo" style="margin-left:8px"></span>
-    <a href="/dashboardEstudiante.html">Inicio</a> |
-    <a href="/estudiante-cursos.html">Cursos</a> |
-    <a href="/estudiante-inscripciones.html">Inscripciones</a> |
-    <a href="/estudiante-pagos.html">Pagos</a> |
-    <a href="/estudiante-tutores.html">Tutores</a> |
-    <a href="/estudiante-materiales.html">Materiales</a>
-  </nav>
+    <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Materiales</h1>
 
-  <h1>Materiales</h1>
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
+ <nav id="navadmin">
+	<a href="/dashboardEstudiante.html">🏠 Inicio</a> |
+	<a href="/estudiante-cursos.html">📘 Cursos</a> |
+	<a href="/estudiante-inscripciones.html">📝 Inscripciones</a> |
+	<a href="/estudiante-pagos.html">💳 Pagos</a> |
+	<a href="/estudiante-tutores.html">👨‍🏫 Tutores</a> |
+	<a href="/estudiante-reportes.html">📊 Reportes</a> |
+	<a href="/estudiante-materiales.html">📚 Materiales</a> |
+</nav>
   <div id="materiales-list"></div>
 
 </body>

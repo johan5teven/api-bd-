@@ -2,12 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar Sesión</title>
+  <title>Iniciar Sesión - TalentNetworkUEB</title>
+    
+    <link rel="stylesheet" href="css/styleslogin.css" />
+    <link rel="stylesheet" href="css/registerlogin.css" />
+    <link rel="icon" href="images/icon.png" />
 </head>
 <body>
-  <h2>Iniciar Sesión</h2>
+     <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+
+		<nav class="header-button">
+			<ul>
+				<li>
+                            <a href="login.html">Iniciar sesión</a>
+  
+        </li>
+			</ul>
+		</nav>
+	</header>
+
+   <div class="container-in">
+        <div class="forms">
+            <div class="header-login">
+                <div class="loginTitle"><h1>Iniciar Sesión</h1></div>
+                <div class="line"></div>
+            </div>
+                        <div class="login">
+
   <form id="loginForm">
-    <label for="correo">Correo electrónico:</label>
+    <label for="correo">Correo electrónico </label>
     <input type="email" id="correo" name="correo" required><br>
 
     <label for="contrasena">Contraseña:</label>
@@ -15,9 +43,17 @@
 
     <button type="submit">Ingresar</button>
   </form>
-
   <p id="mensaje" style="color:rgb(233, 103, 103);"></p>
+                        </div>
+        </div>
+   </div>
 
+   <footer>
+        <p>
+            &copy; 2025 Talent Network UEB&nbsp;  &nbsp;Bases de datos 2&nbsp;  &nbsp;
+            Universidad El Bosque
+        </p>
+    </footer>
   <script>
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -49,5 +85,6 @@
       }
     });
   </script>
+  
 </body>
 </html>

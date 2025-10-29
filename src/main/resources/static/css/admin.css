@@ -139,6 +139,9 @@ background-color: #f1f1f1;
 tbody tr:hover {
 background-color: #aed5dc;
 }
+#inscripciones, #cursos, #materiales-list, #pagos, #tutores, #cursos {
+    flex: 1;
+}
 
 /* ---------------- ACTIVIDAD ---------------- */
 #actividadReciente {

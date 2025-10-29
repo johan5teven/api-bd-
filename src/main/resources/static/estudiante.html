@@ -2,22 +2,31 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Servicios - Estudiante</title>
+  <title>Servicios - Estudiante - TalentNetworkUEB</title>
+     <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
   <script defer src="/js/estudiante.js"></script>
   <script defer src="/js/estudiante-session.js"></script>
-  <style>
-    body{font-family:Arial;padding:16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .card{border:1px solid #ddd;padding:12px;border-radius:6px;background:#fff}
-    .card h3{margin:0 0 8px}
-  </style>
 </head>
 <body>
-  <h1>Servicios disponibles</h1>
-  <div style="margin-bottom:12px">
-    <button id="logoutBtn">Cerrar sesión</button>
+     <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Servicios Disponibles</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
     <span id="sessionInfo" style="margin-left:8px"></span>
   </div>
+  <section id="panel">
   <h2>Cursos</h2>
   <div id="cursos" class="grid"></div>
   <h2>Libros y Productos</h2>
@@ -27,16 +36,20 @@
   <h2>Guías / Blogs</h2>
   <div id="guias" class="grid"></div>
   <hr>
-  <h2>Comprar Agendamiento</h2>
+  
+  <form id="crear">
+  <h2>Agendar </h2>
   <div style="max-width:600px">
-    <label>Tu id de estudiante (temporal): <input id="estId" type="number" placeholder="1"></label>
-    <label>Tutor: <select id="selTutor"></select></label>
-    <label>Tier: <select id="selTier"><option value="basico">Básico ($30)</option><option value="mid">Intermedio ($60)</option><option value="pro">Pro ($120)</option></select></label>
+    <label>id de estudiante (temporal): </br></br><input id="estId" type="number" placeholder="1"></label></br>
+    <label>Tutor:</br></br> <select id="selTutor"></select></label></br>
+    <label>Tier: </br></br><select id="selTier"><option value="basico">Básico ($30)</option><option value="mid">Intermedio ($60)</option><option value="pro">Pro ($120)</option></select></label>
     <button id="btnComprar">Comprar agendamiento</button>
+    </form>
   </div>
 
   <h2>Servicios adquiridos</h2>
   <div id="adquiridos"></div>
+  </section>
 </body>
 <footer>
 		<p>

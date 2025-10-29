@@ -2,14 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Dashboard Tutor</title>
+  <title>Dashboard Tutor - TalentNetworkUEB</title>
+  <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+<link rel="icon" href="images/icono.png" />
   <script defer src="/js/tutor-dashboard.js"></script>
-  <style>body{font-family:Arial;padding:16px}.card{border:1px solid #ddd;padding:8px;margin:8px;border-radius:6px}</style>
 </head>
 <body>
-  <h1>Dashboard Tutor</h1>
-  <label>Su id de tutor (temporal): <input id="tutorId" type="number"></label>
-  <button id="btnLoad">Cargar</button>
-  <div id="cursos"></div>
+   <header>
+		<div class="logo">
+			<a href="index.html"> 
+				<img src="images/imagotipo.png" alt="Talent Network UEB" />
+			</a>
+		</div>
+        <h1>Dashboard Tutor</h1>
+
+		<nav class="header-button">
+			<ul>
+				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
+			</ul>
+		</nav>
+	</header>
+ 	<div id="main" style="max-width:1100px;margin:0 auto">
+		<div id="sessionInfo" style="margin:8px 0 16px 0"></div>
+
+		<label>Su id de tutor (temporal): <input id="tutorId" type="number"></label>
+		<button id="btnLoad">Cargar</button>
+
+		<div id="cursos"></div>
+		<section id="panel" style="margin-top:12px"></section>
+	</div>
 </body>
+<footer>
+		<p>
+			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+		</p>
+	</footer>
 </html>
