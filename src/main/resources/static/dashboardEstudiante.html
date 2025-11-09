@@ -2,27 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-<title>Talent Network UEB - Panel Estudiante</title>
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="css/admin.css" />
-<link rel="icon" href="images/icono.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Network UEB - Panel Estudiante</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="icon" href="images/icono.png" />
 </head>
 <body>
 
 <header>
-		<div class="logo">
-			<a href="index.html"> 
-				<img src="images/imagotipo.png" alt="Talent Network UEB" />
-			</a>
-		</div>
-        <h1>Dashboard Estudiante</h1>
+    <div class="logo">
+        <a href="index.html"> 
+            <img src="images/imagotipo.png" alt="Talent Network UEB" />
+        </a>
+    </div>
+    <h1>Dashboard Estudiante</h1>
 
-		<nav class="header-button">
-			<ul>
-				<li><button id="logoutBtn" href="/logout">Cerrar Sesión</button></li>
-			</ul>
-		</nav>
-	</header>
+    <nav class="header-button">
+        <ul>
+            <li><button id="logoutBtn">Cerrar Sesión</button></li>
+        </ul>
+    </nav>
+</header>
 
 
 
@@ -31,45 +32,145 @@
 
 
 <nav id="navadmin">
-	<a href="/dashboardEstudiante.html">🏠 Inicio</a> |
-	<a href="/estudiante-cursos.html">📘 Cursos</a> |
-	<a href="/estudiante-inscripciones.html">📝 Inscripciones</a> |
-	<a href="/estudiante-pagos.html">💳 Pagos</a> |
-	<a href="/estudiante-tutores.html">👨‍🏫 Tutores</a> |
-	<a href="/estudiante-reportes.html">📊 Reportes</a> |
-	<a href="/estudiante-materiales.html">📚 Materiales</a> |
+    <a href="/dashboardEstudiante.html">🏠 Inicio</a> |
+    <a href="/estudiante-cursos.html">📘 Cursos</a> |
+    <a href="/estudiante-inscripciones.html">📝 Inscripciones</a> |
+    <a href="/estudiante-pagos.html">💳 Pagos</a> |
+    <a href="/estudiante-tutores.html">👨‍🏫 Tutores</a> |
+    <a href="/estudiante-reportes.html">📊 Reportes</a> |
+    <a href="/estudiante-materiales.html">📚 Materiales</a>
 </nav>
-<section id="panel">
-</section>
+
+<main>
+    <section id="panel">
+        <div class="dashboard-container">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Cursos Inscritos</h3>
+                    <p id="cursosInscritos">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Materiales Disponibles</h3>
+                    <p id="materialesDisponibles">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pagos Realizados</h3>
+                    <p id="pagosRealizados">$0.00</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Tutores Asignados</h3>
+                    <p id="tutoresAsignados">0</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="panel-section">
+                    <h2>Actividad Reciente</h2>
+                    <ul id="actividadReciente">
+                        <li>Cargando actividad...</li>
+                    </ul>
+                </div>
+                
+                <div class="panel-section">
+                    <h2>Acciones Rápidas</h2>
+                    <div class="quick-actions">
+                        <button onclick="window.location.href='/estudiante-cursos.html'">Ver Cursos</button>
+                        <button onclick="window.location.href='/estudiante-inscripciones.html'">Mis Inscripciones</button>
+                        <button onclick="window.location.href='/estudiante-pagos.html'">Historial de Pagos</button>
+                        <button onclick="window.location.href='/estudiante-materiales.html'">Descargar Materiales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>
+        &copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
+    </p>
+</footer>
+
 <script>
-	async function checkSession() {
-		try {
-			const res = await fetch('/api/auth/session');
-			if (res.status === 200) {
-				const body = await res.json();
-				document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
-			} else {
-				// not authenticated -> redirect to login
-				window.location.href = '/login.html';
-			}
-		} catch (e) {
-			console.error(e);
-		}
-	}
+    async function checkSession() {
+        try {
+            const res = await fetch('/api/auth/session');
+            if (res.status === 200) {
+                const body = await res.json();
+                document.getElementById('sessionInfo').innerText = 'Conectado como: ' + (body.correo || body.id);
+                loadDashboardData();
+            } else {
+                // not authenticated -> redirect to login
+                window.location.href = '/login.html';
+            }
+        } catch (e) {
+            console.error('Error checking session:', e);
+            window.location.href = '/login.html';
+        }
+    }
 
-	// estudiante-session.js will wire logout and session check
-	// keep calling checkSession for backward compatibility
-	if (typeof checkSession === 'function') checkSession();
-	</script>
+    async function loadDashboardData() {
+        try {
+            // Cargar estadísticas del estudiante
+            const [inscripciones, materiales, pagos, tutores] = await Promise.all([
+                fetch('/api/estudiante/inscripciones').then(r => r.ok ? r.json() : []),
+                fetch('/api/estudiante/materiales').then(r => r.ok ? r.json() : []),
+                fetch('/api/estudiante/pagos').then(r => r.ok ? r.json() : []),
+                fetch('/api/estudiante/mis-tutores').then(r => r.ok ? r.json() : [])
+            ]);
 
-	<script defer src="/js/estudiante-session.js"></script>
+            // Actualizar contadores
+            document.getElementById('cursosInscritos').textContent = inscripciones.length || 0;
+            document.getElementById('materialesDisponibles').textContent = materiales.length || 0;
+            document.getElementById('tutoresAsignados').textContent = tutores.length || 0;
+            
+            // Calcular total de pagos
+            const totalPagos = pagos.reduce((sum, pago) => sum + (pago.monto || 0), 0);
+            document.getElementById('pagosRealizados').textContent = `$${totalPagos.toFixed(2)}`;
+
+            // Cargar actividad reciente
+            loadRecentActivity();
+
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+        }
+    }
+
+    async function loadRecentActivity() {
+        try {
+            const activity = await fetch('/api/estudiante/actividad-reciente').then(r => r.ok ? r.json() : []);
+            const activityList = document.getElementById('actividadReciente');
+            
+            if (activity.length === 0) {
+                activityList.innerHTML = '<li>No hay actividad reciente</li>';
+                return;
+            }
+
+            activityList.innerHTML = activity.map(item => 
+                `<li>[${new Date(item.fecha).toLocaleDateString()}] ${item.descripcion}</li>`
+            ).join('');
+
+        } catch (error) {
+            console.error('Error loading recent activity:', error);
+            document.getElementById('actividadReciente').innerHTML = '<li>Error cargando actividad</li>';
+        }
+    }
+
+    // Inicializar dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+        checkSession();
+        
+        // Configurar botón de logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            fetch('/logout', { method: 'POST' })
+                .then(() => window.location.href = '/login.html')
+                .catch(() => window.location.href = '/login.html');
+        });
+    });
+</script>
+
+<script defer src="/js/estudiante-session.js"></script>
 
 </body>
-<footer>
-		<p>
-			&copy; 2025 Talent Network UEB&nbsp;&nbsp;Bases de datos 2&nbsp;&nbsp;Universidad El Bosque
-		</p>
-	</footer>
 </html>
 
 
