@@ -4,33 +4,36 @@ import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.project.project.exception.LogStorageException;
 import com.project.project.model.LogEventoMongo;
-import com.project.project.repository.LogMongoRepository;
 
 @Service
 public class LogMongoService {
 
     private static final Logger logger = LoggerFactory.getLogger(LogMongoService.class);
 
-    private final LogMongoRepository logRepo;
+    private final MongoTemplate mongoTemplate;
 
-    public LogMongoService(LogMongoRepository logRepo) {
-        this.logRepo = logRepo;
+    public LogMongoService(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
     }
 
     /**
      * Save a LogEventoMongo, ensuring timestamp and consistent error handling.
+     * Routes to appropriate collection based on event type.
      */
     public LogEventoMongo save(LogEventoMongo evento) {
         try {
             if (evento.getFecha() == null) {
                 evento.setFecha(LocalDateTime.now());
             }
-            LogEventoMongo saved = logRepo.save(evento);
-            logger.debug("Log saved: id={} tabla={} operacion={}", saved.getId(), saved.getTabla(), saved.getOperacion());
+            
+            String collection = mapCollection(evento.getTabla(), evento.getOperacion());
+            LogEventoMongo saved = mongoTemplate.save(evento, collection);
+            logger.debug("Log saved: id={} tabla={} operacion={} collection={}", saved.getId(), saved.getTabla(), saved.getOperacion(), collection);
             return saved;
         } catch (Exception ex) {
             logger.error("Failed to save log evento to MongoDB: {}", ex.getMessage(), ex);
@@ -62,5 +65,32 @@ public class LogMongoService {
 
     public void registrarEvento(String tabla, String operacion, String descripcion, String usuario) {
         registrarEvento(tabla, operacion, descripcion, usuario, null, null);
+    }
+
+    /**
+     * Maps event type to appropriate collection for routing logs
+     */
+    private String mapCollection(String tabla, String operacion) {
+        if (tabla == null) tabla = "";
+        if (operacion == null) operacion = "";
+        
+        // Eventos de autenticación
+        if (tabla.equalsIgnoreCase("usuario") && (operacion.contains("login") || operacion.contains("logout") || operacion.contains("auth"))) {
+            return "auth_logs";
+        }
+        
+        // Errores y excepciones
+        if (operacion.contains("error") || operacion.contains("exception") || operacion.contains("fail")) {
+            return "error_logs";
+        }
+        
+        // Actividades de negocio (compras, creación de cursos, etc.)
+        if (tabla.matches("(?i)(curso|orden|pago|inscripcion|material)") || 
+            operacion.matches("(?i)(crear|comprar|pagar|inscribir|curso_|orden_)")) {
+            return "activity_logs";
+        }
+        
+        // Por defecto, eventos generales
+        return "event_logs";
     }
 }
